@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="wrapper">
+                <h2>Register</h2>
+                <hr>
+                <form #registerForm="ngForm" (submit)="onSubmitHandler()">
+                    <!-- <h2>{{registerForm.value | json}}</h2>
+                    <hr>
+                    <h2>{{userModel|json}}</h2> -->
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" name="firstName" id="firstName" class="form-control" [(ngModel)]="userModel.firstName"
+                        required 
+                        #firstName="ngModel"
+                        [class.is-invalid]="firstName.invalid && firstName.touched"
+                        >
+                        <small class="text-danger"[class.d-none]="firstName.untouched|| firstName.valid">First name is required!</small>
+                      
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text"
+                         name="email" id="email" 
+                         class="form-control"[(ngModel)]="userModel.email"
+                         required 
+                         pattern="[a-z0-9._%+-]+@[a-z0-9.+-]+\.[a-z]{2,4}$"
+                         #email="ngModel"
+                         [class.is-invalid]="email.invalid && email.touched">
+                         <div *ngIf="email.errors && email.touched">
+                            <small class="text-danger" *ngIf="email.errors['required']">Email is required!</small>
+                            <small class="text-danger"*ngIf="email.errors['pattern']">Email is not valid</small>
+                         
+                         </div>
+                         
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile</label>
+                        <input type="number" 
+                        name="mobile" id="mobile" 
+                        class="form-control" 
+                        [(ngModel)]="userModel.mobile"
+                        required 
+                        pattern="^\d{10}"
+                        #mobile="ngModel"
+                        [class.is-invalid]="mobile.invalid && mobile.touched">
+                        <div *ngIf="mobile.errors && mobile.touched">
+                            <small class="text-danger" *ngIf="mobile.errors['required']">Mobile Number is required!</small>
+                            <small class="text-danger"*ngIf="mobile.errors['pattern']">Mobile Number must be of 10 digits</small>
+                         
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password"
+                         name="password" id="password" 
+                         class="form-control"[(ngModel)]="userModel.password"
+                         required 
+                         minlength="6"
+                         #password="ngModel"
+                         [class.is-invalid]="password.invalid && password.touched">
+                         <div *ngIf="password.errors && password.touched">
+                            <small class="text-danger" *ngIf="password.errors['required']">Password is required!</small>
+                            <small class="text-danger"*ngIf="password.errors['minlength']">Password min(6) required </small>
+                         
+                         </div>
+                    </div>
+
+                    <input type="submit" value="Register" class="btn btn-primary btn-block"
+                    [disabled]="registerForm.invalid">
+
+                </form>
+                <br>
+                <p class="text-center">
+                    Already Registered? <a href="#">Click Here</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
